@@ -1,16 +1,19 @@
 import React, { useState } from 'react';
 import { Menu, X, Play, Users, Clock, Award, ChevronDown, Mail, Phone, MapPin } from 'lucide-react';
-
+import boy from './assets/boy.jpg'
+import africanBoy from './assets/African_boy.jpg'
+import little_boy from './assets/little_boy.jpg'
+import schedule from './assets/rescheduling.jpg'
 export default function MathCodeAcademy() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [expandedFaq, setExpandedFaq] = useState(null);
 
   const ageGroups = [
-    { range: "5-7 years", title: "Little Mathematicians", description: "Fun introduction to numbers and basic coding concepts through games and visual programming" },
-    { range: "8-10 years", title: "Junior Coders", description: "Elementary math concepts and Scratch programming with interactive projects" },
-    { range: "11-13 years", title: "Math Explorers", description: "Pre-algebra, geometry, and introduction to text-based programming languages" },
-    { range: "14-16 years", title: "Code Creators", description: "Advanced mathematics and full-stack development with real-world projects" },
-    { range: "17-18 years", title: "Tech Leaders", description: "Calculus, statistics, and advanced programming preparing for college and careers" }
+    { range: "5-7 years. Grade 1-2", title: "Little Mathematicians", description: "Fun introduction to numbers and basic coding concepts through games and visual programming" },
+    { range: "8-10 years, Grade 3-5", title: "Junior Coders", description: "Elementary math concepts and Scratch programming with interactive projects" },
+    { range: "11-13 years, Grade 6-8", title: "Math Explorers", description: "Pre-algebra, geometry, and introduction to text-based programming languages" },
+    { range: "14-16 years, Grade 9-11", title: "Code Creators", description: "Advanced mathematics and full-stack development with real-world projects" },
+    { range: "17-18 years, Grade 12", title: "Tech Leaders", description: "Calculus, statistics, and advanced programming preparing for college and careers" }
   ];
 
   const faqs = [
@@ -28,9 +31,9 @@ export default function MathCodeAcademy() {
           <div className="flex justify-between items-center py-4">
             <div className="flex items-center space-x-2">
               <div className="w-10 h-10 bg-gradient-to-r from-cyan-400 to-purple-400 rounded-lg flex items-center justify-center font-bold text-black">
-                EA
+                CA
               </div>
-              <p className="text-xl font-bold">Erudite Academy</p> <br/>
+              <p className="text-xl font-bold">Crest Academy</p> <br/>
             </div>
 
             <div className="hidden md:flex space-x-8">
@@ -77,10 +80,10 @@ export default function MathCodeAcademy() {
               <button className="px-8 py-4 bg-gradient-to-r from-cyan-500 to-purple-500 rounded-full font-semibold hover:from-cyan-600 hover:to-purple-600 transition-all transform hover:scale-105 shadow-2xl">
                 Start Free Trial
               </button>
-              <button className="px-8 py-4 border-2 border-white/30 rounded-full font-semibold hover:bg-white/10 transition-all flex items-center gap-2">
+             {/* <button className="px-8 py-4 border-2 border-white/30 rounded-full font-semibold hover:bg-white/10 transition-all flex items-center gap-2">
                 <Play size={20} />
                 Watch Demo
-              </button>
+              </button> */}
             </div>
           </div>
           
@@ -93,18 +96,18 @@ export default function MathCodeAcademy() {
                   <div className="w-16 h-16 bg-white/10 rounded-full flex items-center justify-center mx-auto mb-3">
                     <Play size={32} className="text-cyan-400" />
                   </div>
-                  <p className="text-sm text-gray-300">Live class screenshot or<br />student coding session</p>
+                  <img src={boy}/>
                 </div>
               </div>
               <div className="p-8">
                 <div className="space-y-4">
                   <div className="flex items-center gap-3">
                     <Users className="text-cyan-400" size={24} />
-                    <span className="text-lg">Small Class Sizes (6-12 students)</span>
+                    <span className="text-lg text-cyan-400">Small Class Sizes (6-12 students)</span>
                   </div>
                   <div className="flex items-center gap-3">
                     <Clock className="text-purple-400" size={24} />
-                    <span className="text-lg">Live Interactive Sessions</span>
+                    <span className="text-lg text-bold text-cyan-400">Live Interactive Sessions</span>
                   </div>
                   <div className="flex items-center gap-3">
                     <Award className="text-yellow-400" size={24} />
@@ -136,11 +139,11 @@ export default function MathCodeAcademy() {
               <div className="h-48 bg-gradient-to-br from-cyan-400/30 to-blue-400/30 flex items-center justify-center">
                 <div className="text-center">
                   <Users size={48} className="text-white mx-auto mb-2" />
-                  <p className="text-sm">Students collaborating<br />in live session</p>
+                  <img src={africanBoy}/>
                 </div>
               </div>
               <div className="p-8">
-                <h3 className="text-2xl font-bold mb-4">Live & Interactive</h3>
+                <h3 className="text-2xl text-cyan-600 font-bold mb-4">Live & Interactive</h3>
                 <p className="text-gray-300">
                   Real-time instruction with immediate feedback, peer collaboration, and personalized attention in small groups.
                 </p>
@@ -152,11 +155,11 @@ export default function MathCodeAcademy() {
               <div className="h-48 bg-gradient-to-br from-purple-400/30 to-pink-400/30 flex items-center justify-center">
                 <div className="text-center">
                   <Award size={48} className="text-white mx-auto mb-2" />
-                  <p className="text-sm">Student showing<br />completed project</p>
+                 <img src={little_boy}/>
                 </div>
               </div>
               <div className="p-8">
-                <h3 className="text-2xl font-bold mb-4">Project-Based</h3>
+                <h3 className="text-2xl text-cyan-400 font-bold mb-4">Project-Based</h3>
                 <p className="text-gray-300">
                   Students build real applications, solve practical problems, and create projects they can proudly share.
                 </p>
@@ -168,12 +171,12 @@ export default function MathCodeAcademy() {
               <div className="h-48 bg-gradient-to-br from-blue-400/30 to-cyan-400/30 flex items-center justify-center">
                 <div className="text-center">
                   <Clock size={48} className="text-white mx-auto mb-2" />
-                  <p className="text-sm">Flexible scheduling<br />interface</p>
+                 <img src={schedule}/>
                 </div>
               </div>
               <div className="p-8">
-                <h3 className="text-2xl font-bold mb-4">Flexible Schedule</h3>
-                <p className="text-gray-300">
+                <h3 className="text-2xl font-bold mb-4 text-purple-500">Flexible Schedule</h3>
+                <p className="text-purple-700">
                   Multiple time slots available to fit around school schedules, with recorded sessions for review.
                 </p>
               </div>
@@ -194,10 +197,10 @@ export default function MathCodeAcademy() {
             </p>
           </div>
           
-          <div className="space-y-6">
+          <div className="space-y-7">
             {ageGroups.map((group, index) => (
               <div key={index} className="bg-gradient-to-r from-black/40 to-black/20 rounded-2xl overflow-hidden border border-white/10 hover:border-cyan-400/50 transition-all">
-                <div className="grid md:grid-cols-5 gap-6 items-center">
+                <div className="grid md:grid-cols-5 gap-1 items-center">
                   {/* Age Group Image */}
                   <div className="h-32 md:h-24 bg-gradient-to-br from-cyan-400/20 to-purple-400/20 flex items-center justify-center">
                     <div className="text-center">
@@ -344,11 +347,11 @@ export default function MathCodeAcademy() {
               <div className="space-y-6">
                 <div className="flex items-center gap-4">
                   <Mail className="text-cyan-400" size={24} />
-                  <span className="text-lg">hello@mathcodeacademy.com</span>
+                  <span className="text-lg">hello@crestacademy.com</span>
                 </div>
                 <div className="flex items-center gap-4">
                   <Phone className="text-purple-400" size={24} />
-                  <span className="text-lg">+1 (555) 123-4567</span>
+                  <span className="text-lg">+234 (816) 572-2442</span>
                 </div>
                 <div className="flex items-center gap-4">
                   <MapPin className="text-yellow-400" size={24} />
@@ -407,17 +410,19 @@ export default function MathCodeAcademy() {
           <div className="flex flex-col md:flex-row justify-between items-center">
             <div className="flex items-center space-x-2 mb-4 md:mb-0">
               <div className="w-8 h-8 bg-gradient-to-r from-cyan-400 to-purple-400 rounded-lg flex items-center justify-center font-bold text-black text-sm">
-                MC
+                CA
               </div>
-              <span className="text-lg font-bold">MathCode Academy</span>
+              <span className="text-lg font-bold">Crest Academy</span>
             </div>
             <div className="text-gray-400 text-center md:text-right">
-              <p>&copy; 2025 MathCode Academy. All rights reserved.</p>
+              <p>&copy; 2025 crest Academy. All rights reserved.</p>
               <p className="text-sm mt-1">Empowering the next generation of problem solvers</p>
             </div>
           </div>
         </div>
       </footer>
     </div>
+
+
   );
 }
