@@ -4,16 +4,42 @@ import boy from './assets/boy.jpg'
 import africanBoy from './assets/African_boy.jpg'
 import little_boy from './assets/little_boy.jpg'
 import schedule from './assets/rescheduling.jpg'
+
 export default function MathCodeAcademy() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [expandedFaq, setExpandedFaq] = useState(null);
 
   const ageGroups = [
-    { range: "5-7 years. Grade 1-2", title: "Little Mathematicians", description: "Fun introduction to numbers and basic coding concepts through games and visual programming" },
-    { range: "8-10 years, Grade 3-5", title: "Junior Coders", description: "Elementary math concepts and Scratch programming with interactive projects" },
-    { range: "11-13 years, Grade 6-8", title: "Math Explorers", description: "Pre-algebra, geometry, and introduction to text-based programming languages" },
-    { range: "14-16 years, Grade 9-11", title: "Code Creators", description: "Advanced mathematics and full-stack development with real-world projects" },
-    { range: "17-18 years, Grade 12", title: "Tech Leaders", description: "Calculus, statistics, and advanced programming preparing for college and careers" }
+    { 
+      range: "5-7 years. Grade 1-2", 
+      title: "Little Mathematicians", 
+      description: "Fun introduction to numbers and basic coding concepts through games and visual programming",
+      slug: "little-mathematicians"
+    },
+    { 
+      range: "8-10 years, Grade 3-5", 
+      title: "Junior Coders", 
+      description: "Elementary math concepts and Scratch programming with interactive projects",
+      slug: "junior-coders"
+    },
+    { 
+      range: "11-13 years, Grade 6-8", 
+      title: "Math Explorers", 
+      description: "Pre-algebra, geometry, and introduction to text-based programming languages",
+      slug: "math-explorers"
+    },
+    { 
+      range: "14-16 years, Grade 9-11", 
+      title: "Code Creators", 
+      description: "Advanced mathematics and full-stack development with real-world projects",
+      slug: "code-creators"
+    },
+    { 
+      range: "17-18 years, Grade 12", 
+      title: "Tech Leaders", 
+      description: "Calculus, statistics, and advanced programming preparing for college and careers",
+      slug: "tech-leaders"
+    }
   ];
 
   const faqs = [
@@ -22,6 +48,44 @@ export default function MathCodeAcademy() {
     { q: "Do you provide certificates?", a: "Yes, students receive certificates of completion for each course and can earn achievement badges for special projects." },
     { q: "What technology do students need?", a: "Just a computer with internet connection and webcam. We provide access to all coding platforms and tools." }
   ];
+
+  // PDF handling functions (moved outside of component)
+  const generatePdfUrl = (group) => {
+    const slug = group.slug || group.title.toLowerCase()
+      .replace(/\s+/g, '-')
+      .replace(/[^a-z0-9-]/g, '');
+    
+    return `/curricula/${slug}-curriculum.pdf`;
+  };
+
+  // Handle PDF navigation with error handling
+  const handleLearnMore = async (group) => {
+    try {
+      const pdfUrl = generatePdfUrl(group);
+      
+      // Check if PDF exists (optional)
+      const response = await fetch(pdfUrl, { method: 'HEAD' });
+      
+      if (response.ok) {
+        // Open PDF in new tab
+        window.open(pdfUrl, '_blank');
+      } else {
+        // Fallback message
+        alert(`Curriculum for ${group.title} is coming soon. Please contact us for more information.`);
+      }
+    } catch (error) {
+      console.error('Error accessing curriculum PDF:', error);
+      // Simple fallback - just try to open the PDF anyway
+      const pdfUrl = generatePdfUrl(group);
+      window.open(pdfUrl, '_blank');
+    }
+  };
+
+  // Alternative: Simple direct navigation (no error checking)
+  const handleLearnMoreSimple = (group) => {
+    const pdfUrl = generatePdfUrl(group);
+    window.open(pdfUrl, '_blank');
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900 text-white">
@@ -33,7 +97,7 @@ export default function MathCodeAcademy() {
               <div className="w-10 h-10 bg-gradient-to-r from-cyan-400 to-purple-400 rounded-lg flex items-center justify-center font-bold text-black">
                 CA
               </div>
-              <p className="text-xl font-bold">Crest Academy</p> <br/>
+              <p className="text-xl font-bold">Crest Academy</p>
             </div>
 
             <div className="hidden md:flex space-x-8">
@@ -66,7 +130,6 @@ export default function MathCodeAcademy() {
 
       {/* Hero Section */}
       <section id="home" className="pt-20 min-h-screen flex items-center">
-
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-2 gap-12 items-center">
           <div className="space-y-8">
             <h1 className="text-5xl lg:text-7xl font-bold leading-tight">
@@ -80,23 +143,18 @@ export default function MathCodeAcademy() {
               <button className="px-8 py-4 bg-gradient-to-r from-cyan-500 to-purple-500 rounded-full font-semibold hover:from-cyan-600 hover:to-purple-600 transition-all transform hover:scale-105 shadow-2xl">
                 Start Free Trial
               </button>
-             {/* <button className="px-8 py-4 border-2 border-white/30 rounded-full font-semibold hover:bg-white/10 transition-all flex items-center gap-2">
-                <Play size={20} />
-                Watch Demo
-              </button> */}
             </div>
           </div>
           
           <div className="relative">
             <div className="absolute inset-0 bg-gradient-to-r from-cyan-400/20 to-purple-400/20 rounded-3xl blur-3xl"></div>
             <div className="relative bg-black/20 backdrop-blur-sm rounded-3xl overflow-hidden border border-white/10">
-              {/* Hero Image Placeholder */}
               <div className="h-64 bg-gradient-to-br from-cyan-500/20 to-purple-500/20 flex items-center justify-center border-b border-white/10">
                 <div className="text-center">
                   <div className="w-16 h-16 bg-white/10 rounded-full flex items-center justify-center mx-auto mb-3">
                     <Play size={32} className="text-cyan-400" />
                   </div>
-                  <img src={boy}/>
+                  <img src={boy} alt="Student learning" className="rounded-lg"/>
                 </div>
               </div>
               <div className="p-8">
@@ -135,11 +193,10 @@ export default function MathCodeAcademy() {
           
           <div className="grid md:grid-cols-3 gap-8">
             <div className="bg-gradient-to-br from-cyan-500/10 to-purple-500/10 rounded-2xl overflow-hidden border border-white/10">
-              {/* Feature Image 1 */}
               <div className="h-48 bg-gradient-to-br from-cyan-400/30 to-blue-400/30 flex items-center justify-center">
                 <div className="text-center">
                   <Users size={48} className="text-white mx-auto mb-2" />
-                  <img src={africanBoy}/>
+                  <img src={africanBoy} alt="African boy learning" className="rounded-lg"/>
                 </div>
               </div>
               <div className="p-8">
@@ -151,11 +208,10 @@ export default function MathCodeAcademy() {
             </div>
             
             <div className="bg-gradient-to-br from-purple-500/10 to-pink-500/10 rounded-2xl overflow-hidden border border-white/10">
-              {/* Feature Image 2 */}
               <div className="h-48 bg-gradient-to-br from-purple-400/30 to-pink-400/30 flex items-center justify-center">
                 <div className="text-center">
                   <Award size={48} className="text-white mx-auto mb-2" />
-                 <img src={little_boy}/>
+                 <img src={little_boy} alt="Little boy coding" className="rounded-lg"/>
                 </div>
               </div>
               <div className="p-8">
@@ -167,11 +223,10 @@ export default function MathCodeAcademy() {
             </div>
             
             <div className="bg-gradient-to-br from-blue-500/10 to-cyan-500/10 rounded-2xl overflow-hidden border border-white/10">
-              {/* Feature Image 3 */}
               <div className="h-48 bg-gradient-to-br from-blue-400/30 to-cyan-400/30 flex items-center justify-center">
                 <div className="text-center">
                   <Clock size={48} className="text-white mx-auto mb-2" />
-                 <img src={schedule}/>
+                 <img src={schedule} alt="Schedule" className="rounded-lg"/>
                 </div>
               </div>
               <div className="p-8">
@@ -185,38 +240,60 @@ export default function MathCodeAcademy() {
         </div>
       </section>
 
-      {/* Programs Section */}
-      <section id="programs" className="py-20">
+      {/* Programs Section - FIXED */}
+      <section id="programs" className="py-16 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl lg:text-5xl font-bold mb-6">
-              Programs for <span className="text-purple-400">Every Age</span>
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">
+              Programs for Every Age
             </h2>
-            <p className="text-xl text-gray-300">
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
               Carefully designed curriculum that grows with your child's development and interests.
             </p>
           </div>
-          
-          <div className="space-y-7">
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {ageGroups.map((group, index) => (
-              <div key={index} className="bg-gradient-to-r from-black/40 to-black/20 rounded-2xl overflow-hidden border border-white/10 hover:border-cyan-400/50 transition-all">
-                <div className="grid md:grid-cols-5 gap-1 items-center">
-                  {/* Age Group Image */}
-                  <div className="h-32 md:h-24 bg-gradient-to-br from-cyan-400/20 to-purple-400/20 flex items-center justify-center">
-                    <div className="text-center">
-                      <div className="text-2xl font-bold text-cyan-400 mb-1">{group.range}</div>
-                      <div className="text-xs text-gray-400">Age Range</div>
+              <div 
+                key={index} 
+                className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300"
+              >
+                <div className="h-48 bg-gray-200 flex items-center justify-center overflow-hidden">
+                  {group.image ? (
+                    <img 
+                      src={group.image} 
+                      alt={group.title}
+                      className="w-full h-full object-cover"
+                    />
+                  ) : (
+                    <div className="text-gray-400 text-6xl">
+                      🎓
                     </div>
+                  )}
+                </div>
+                
+                <div className="p-6">
+                  <div className="mb-4">
+                    <span className="inline-block bg-blue-100 text-blue-800 text-sm font-medium px-3 py-1 rounded-full">
+                      {group.range}
+                    </span>
+                    <p className="text-xs text-gray-500 mt-1">Age Range</p>
                   </div>
-                  <div className="md:col-span-3 p-6 md:p-0">
-                    <h3 className="text-2xl font-bold mb-3">{group.title}</h3>
-                    <p className="text-gray-300">{group.description}</p>
-                  </div>
-                  <div className="text-center p-6 md:p-0">
-                    <button className="px-6 py-3 bg-gradient-to-r from-cyan-500 to-purple-500 rounded-full font-semibold hover:from-cyan-600 hover:to-purple-600 transition-all">
-                      Learn More
-                    </button>
-                  </div>
+                  
+                  <h3 className="text-xl font-semibold text-gray-900 mb-3">
+                    {group.title}
+                  </h3>
+                  
+                  <p className="text-gray-600 mb-6 line-clamp-3">
+                    {group.description}
+                  </p>
+                  
+                  <button
+                    onClick={() => handleLearnMore(group)}
+                    className="w-full bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors duration-200 font-medium"
+                  >
+                    Learn More
+                  </button>
                 </div>
               </div>
             ))}
@@ -415,14 +492,12 @@ export default function MathCodeAcademy() {
               <span className="text-lg font-bold">Crest Academy</span>
             </div>
             <div className="text-gray-400 text-center md:text-right">
-              <p>&copy; 2025 crest Academy. All rights reserved.</p>
+              <p>&copy; 2025 Crest Academy. All rights reserved.</p>
               <p className="text-sm mt-1">Empowering the next generation of problem solvers</p>
             </div>
           </div>
         </div>
       </footer>
     </div>
-
-
   );
 }
